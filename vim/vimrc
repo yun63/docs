@@ -1,0 +1,343 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maintainer: yun63 towardstheway@gmail.com
+" Version: 0.1
+" Last Change: 01/04/12 16:12:57 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set mouse=a
+set nocompatible
+set nocp
+" 检测文件类型
+filetype on
+" 针对不同的文件类型采用不同的缩进格式
+filetype indent on
+" 允许插件
+filetype plugin on
+" 启动自动补全
+filetype plugin indent on
+
+syntax on
+
+set wildignore=*.o,*~,*.pyc,*.beam                                               
+set wildignore+=.git\*,.hg\*,.svn\*                                          
+
+
+" 文件修改之后自动载入
+set autoread
+" 启动的时候不显示那个援助索马里儿童的提示
+set shortmess=atI
+" 备份，防止误删
+set backup
+set backupext=.bak
+set backupdir=~
+
+set foldmethod=syntax
+set foldlevel=20 
+
+" 突出显示当前列
+"set cursorcolumn
+" 退出vim,内容显示在终端屏幕,防止误删
+"set t_ti= t_te=
+" 键入即时搜索
+set incsearch
+set infercase
+
+set autoindent
+set cindent
+
+set mouse=v
+set encoding=UTF-8
+set langmenu=zh_CN.UTF-8
+language messages zh_CN.UTF-8
+set fileencodings=ucs-bom,utf-8,gbk,gb18030,cp936,big5,euc-cn,euc-kr,latin1
+
+let g:DoxygenToolkit_briefTag_funcName="yes" 
+let g:DoxygenToolkit_briefTag_pre="@brief  "
+let g:DoxygenToolkit_paramTag_pre="@param  "
+let g:DoxygenToolkit_returnTag="@return  "
+
+set history=400
+set t_Co=256
+
+let mapleader = ","
+let g:mapleader = "\\"
+
+nmap <F9> :SCCompile<cr>
+nmap <F10> :SCCompileRun<cr>
+
+
+nmap <silent> <leader>qa :qa<cr>
+nmap <silent> <leader><cr> :noh<cr>
+
+
+" Vundle插件管理
+filetype off 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vimscript/c-support'
+Plugin 'vim-scripts/The-NERD-Commenter'
+Plugin 'eikenb/acp'
+Plugin 'vim-scripts/winmanager'
+Plugin 'vim-scripts/neocomplcache'
+Plugin 'sjas/csExplorer'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'vim-scripts/AutoTag'
+Plugin 'dradtke/OmniCppComplete'
+Plugin 'rkowal/Lua-Omni-Vim-Completion'
+Plugin 'vim-scripts/vimwiki'
+Plugin 'vim-scripts/doxygen-support.vim'
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+Plugin 'vim-scripts/AutoComplPop'
+Plugin 'vim-scripts/SuperTab'
+Plugin 'vim-scripts/SingleCompile'
+Plugin 'vim-scripts/lookupfile'
+Plugin 'clones/vim-genutils'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/a.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'vim-scripts/pathogen.vim'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'jimenezrick/vimerl'
+Plugin 'JamshedVesuna/vim-markdown-preview'
+call vundle#end()      
+filetype plugin indent on
+
+map <leader>1 :set syntax=c<cr>
+map <leader>2 :set syntax=xhtml<cr>
+map <leader>3 :set syntax=python<cr>
+map <leader>4 :set ft=javascript<cr>
+map <leader>$ :syntax sync fromstart<cr>
+
+autocmd BufEnter * :syntax sync fromstart
+
+set wildmenu
+set ruler
+set showcmd
+set cmdheight=2
+set nu
+set lz
+set backspace=eol,start,indent
+set whichwrap+=<,>
+set incsearch
+set hlsearch
+set magic
+set noerrorbells
+set novisualbell
+set t_vb=
+set showmatch
+set laststatus=2
+set colorcolumn=120
+
+""""""""""""""""""""""""""""""
+" colorscheme setting
+""""""""""""""""""""""""""""""
+let g:solarized_termcolors=256
+syntax enable
+if has('gui_running')
+    colorscheme solarized 
+    set background=light
+else
+    colorscheme solarized 
+    set background=light
+end
+
+let g:Powerline_colorscheme='solarized256'
+
+" vimrc文件修改之后自动载入
+autocmd! bufwritepost .vimrc source %
+
+vnoremap <silent> * :call VisualSearch('f')<CR>
+vnoremap <silent> # :call VisualSearch('b')<CR>
+
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
+
+map <leader>bd :Bclose<cr>
+map <leader>tn :tabnew
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <silent> <leader>cd :cd %:p:h<cr>
+map <F8> :!/home/leiyunfei/mobile-dev/MoGame/proj.linux/bin/debug/MoGame<CR>
+
+set sessionoptions-=curdir
+set sessionoptions+=sesdir
+
+set nobackup
+set nowb
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+
+set tabstop=4
+set shiftwidth=4
+set ts=4
+set expandtab
+set smarttab
+
+map <leader>t2 :set shiftwidth=2<cr>
+map <leader>t4 :set shiftwidth=4<cr>
+
+au FileType html,vim,javascript setl shiftwidth=2
+au FileType c,java,python setl shiftwidth=4
+au FileType txt setl lbr
+au FileType txt setl tw=78
+
+set ai
+set si
+
+set cindent
+set wrap
+
+
+map <leader>sp [s
+
+set completeopt=menuone,menu,longest
+
+if has("autocmd") && exists("+omnifunc")
+  autocmd Filetype *
+        \if &omnifunc == "" |
+        \  setlocal omnifunc=syntaxcomplete#Complete |
+        \endif
+endif
+
+if has("cscope")
+  if filereadable("cscope.out")
+      cs add cscope.out
+  endif
+endif
+
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+
+nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <script> <silent> <unique> <Leader>tt :NERDTree<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:SuperTabDefaultCompletionType = "<C-P>"
+
+let g:explVertical=1
+let g:explWinSize=35
+let g:explSplitLeft=1
+let g:explSplitBelow=1
+
+let g:explHideFiles='^\.,.*\.class$,.*\.swp$,.*\.pyc$,.*\.git$,.*\.swo$,\.DS_Store$'
+let g:explDetailedHelp=0
+
+let g:bufExplorerDefaultHelp=1       " Do not show default help.
+let g:bufExplorerShowRelativePath=1  " Show relative paths.
+let g:bufExplorerSortBy='mru'        " Sort by most recently used.
+let g:bufExplorerSplitRight=0        " Split left.
+let g:bufExplorerSplitVertical=1     " Split vertically.
+let g:bufExplorerSplitVertSize = 30  " Split width
+let g:bufExplorerUseCurrentWindow=1  " Open in new window.
+let g:bufExplorerMaxHeight=13        " Max height
+
+let g:pydiction_location='~/.vim/pydiction/complete-dict'
+let g:pydiction_menu_height=20
+
+""""""""""""""""""""""""""""""
+" taglist setting
+""""""""""""""""""""""""""""""
+let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Show_One_File=1
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Use_Right_Window=1
+nmap <silent> <leader>tl :Tlist<cr>
+
+""""""""""""""""""""""""""""""
+" winmanager setting
+""""""""""""""""""""""""""""""
+let g:winManagerWindowLayout="FileExplorer,BufExplorer|TagList"
+let g:winManagerWidth=30
+let g:defaultExplorer=0
+nmap <C-W><C-F> :FirstExplorerWindow<cr>
+nmap <C-W><C-B> :BottomExplorerWindow<cr>
+nmap <silent> <leader>wm :WMToggle<cr>
+autocmd BufWinEnter \[Buf\ List\] setl nonumber
+
+let g:netrw_winsize = 30
+
+let g:LookupFile_MinPatLength = 2
+let g:LookupFile_PreserveLastPattern = 0
+let g:LookupFile_PreservePatternHistory = 0
+let g:LookupFile_AlwaysAcceptFirst = 1
+let g:LookupFile_AllowNewFiles = 0
+if filereadable("./filenametags")
+  let g:LookupFile_TagExpr = '"./filenametags"'
+endif
+
+nmap <silent> <leader>mk :MarksBrowser<cr>
+
+let loaded_feraltogglecommentify = 1
+
+autocmd FileType vim set nofen
+autocmd FileType vim map <buffer> <leader><space> :w!<cr>:source %<cr>
+
+autocmd FileType c,cpp  map <buffer> <leader><space> :make<cr>
+
+nmap <leader>cn :cn<cr>
+nmap <leader>cp :cp<cr>
+nmap <leader>cw :cw 10<cr>
+
+noremap <Leader>dm mmHmn:%s/<C-V><cr>//ge<cr>'nzt'm
+
+let g:vimrc_loaded = 1
+set tags=/home/yun63/backup/stl_tags
+set tags+=/home/yun63/mobile-server/trunk/tags
+set tags+=/home/yun63/opensource/cppjieba/tags
+set tags+=./tags
+
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch=1
+let OmniCpp_ShowAccess=1
+let OmniCpp_ShowPrototypeInAbbr = 1 " 显示函数参数列表
+let OmniCpp_MayCompleteDot = 1   " 输入 .  后自动补全
+let OmniCpp_MayCompleteArrow = 1 " 输入 -> 后自动补全
+let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+""""""""""""""""""""""""""""""
+" echofunc setting
+""""""""""""""""""""""""""""""
+let g:EchoFuncLangsUsed=["cpp", "c"]
+
+
+""""""""""""""""""""""""""""""
+" ctrlp setting
+""""""""""""""""""""""""""""""
+let g:ctrlp_max_files = 10000
+let g:ctrlp_max_depth = 60
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_max_depth = 40
+
+""""""""""""""""""""""""""""""
+" vimwiki setting
+""""""""""""""""""""""""""""""
+
+" 设置编码
+let g:vimwiki_w32_dir_enc = 'utf-8'
+" 使用鼠标隐射
+let g:vimwiki_use_mouse = 1
+" 禁用驼峰式生成wiki页面
+let g:vimwiki_camel_case = 0
+
+let g:vimwiki_list=[{'path_html':'~/blog/',
+      \ 'template_path':'~/blog/tpl/',
+      \ 'template_default':'yangqq',
+      \ 'template_ext': '.tpl',
+      \ 'auto_export':0}]
