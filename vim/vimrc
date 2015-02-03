@@ -65,11 +65,6 @@ let g:mapleader = "\\"
 nmap <F9> :SCCompile<cr>
 nmap <F10> :SCCompileRun<cr>
 
-
-nmap <silent> <leader>qa :qa<cr>
-nmap <silent> <leader><cr> :noh<cr>
-
-
 " Vundle插件管理
 filetype off 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -79,7 +74,9 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vimscript/c-support'
+Plugin 'vim-cpp-enhanced-highlight'
 Plugin 'vim-scripts/The-NERD-Commenter'
+Plugin 'vim-scripts/cscope.vim'
 Plugin 'eikenb/acp'
 Plugin 'vim-scripts/winmanager'
 Plugin 'vim-scripts/neocomplcache'
@@ -92,7 +89,6 @@ Plugin 'vim-scripts/vimwiki'
 Plugin 'vim-scripts/doxygen-support.vim'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'vim-scripts/AutoComplPop'
-Plugin 'vim-scripts/SuperTab'
 Plugin 'vim-scripts/SingleCompile'
 Plugin 'vim-scripts/lookupfile'
 Plugin 'clones/vim-genutils'
@@ -105,12 +101,6 @@ Plugin 'jimenezrick/vimerl'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 call vundle#end()      
 filetype plugin indent on
-
-map <leader>1 :set syntax=c<cr>
-map <leader>2 :set syntax=xhtml<cr>
-map <leader>3 :set syntax=python<cr>
-map <leader>4 :set ft=javascript<cr>
-map <leader>$ :syntax sync fromstart<cr>
 
 autocmd BufEnter * :syntax sync fromstart
 
@@ -153,25 +143,21 @@ autocmd! bufwritepost .vimrc source %
 vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
 
-nmap <C-j> <C-W>j
-nmap <C-k> <C-W>k
-nmap <C-h> <C-W>h
-nmap <C-l> <C-W>l
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 
-map <leader>bd :Bclose<cr>
-map <leader>tn :tabnew
-map <leader>te :tabedit
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
+imap <C-k> <esc>C
+
 map <silent> <leader>cd :cd %:p:h<cr>
-map <F8> :!/home/leiyunfei/mobile-dev/MoGame/proj.linux/bin/debug/MoGame<CR>
 
 set sessionoptions-=curdir
 set sessionoptions+=sesdir
 
 set nobackup
 set nowb
-map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=c++ .<CR>
 
 set tabstop=4
 set shiftwidth=4
@@ -205,22 +191,6 @@ if has("autocmd") && exists("+omnifunc")
         \endif
 endif
 
-if has("cscope")
-  if filereadable("cscope.out")
-      cs add cscope.out
-  endif
-endif
-
-set cscopequickfix=s-,c-,d-,i-,t-,e-
-
-nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nmap <script> <silent> <unique> <Leader>tt :NERDTree<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -269,18 +239,6 @@ nmap <silent> <leader>wm :WMToggle<cr>
 autocmd BufWinEnter \[Buf\ List\] setl nonumber
 
 let g:netrw_winsize = 30
-
-let g:LookupFile_MinPatLength = 2
-let g:LookupFile_PreserveLastPattern = 0
-let g:LookupFile_PreservePatternHistory = 0
-let g:LookupFile_AlwaysAcceptFirst = 1
-let g:LookupFile_AllowNewFiles = 0
-if filereadable("./filenametags")
-  let g:LookupFile_TagExpr = '"./filenametags"'
-endif
-
-nmap <silent> <leader>mk :MarksBrowser<cr>
-
 let loaded_feraltogglecommentify = 1
 
 autocmd FileType vim set nofen
@@ -295,11 +253,10 @@ nmap <leader>cw :cw 10<cr>
 noremap <Leader>dm mmHmn:%s/<C-V><cr>//ge<cr>'nzt'm
 
 let g:vimrc_loaded = 1
-set tags=/home/yun63/backup/stl_tags
-set tags+=/home/yun63/mobile-server/trunk/tags
-set tags+=/home/yun63/opensource/cppjieba/tags
-set tags+=./tags
 
+""""""""""""""""""""""""""""""
+" omnicomplete setting
+""""""""""""""""""""""""""""""
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch=1
 let OmniCpp_ShowAccess=1
@@ -310,6 +267,16 @@ let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+highlight darkblue guibg=darkgrey  guifg=black
+highlight lightpurple guibg=lightgrey guifg=black
+
+""""""""""""""""""""""""""""""
+" ctags setting
+""""""""""""""""""""""""""""""
+set tags=/home/yun63/backup/stl_tags
+set tags+=/home/yun63/myself/repos/aoi/tags
+set tags+=./tags
 
 """"""""""""""""""""""""""""""
 " echofunc setting
