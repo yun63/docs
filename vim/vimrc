@@ -169,7 +169,7 @@ map <leader>t2 :set shiftwidth=2<cr>
 map <leader>t4 :set shiftwidth=4<cr>
 
 au FileType html,vim,javascript setl shiftwidth=2
-au FileType c,java,python setl shiftwidth=4
+au FileType c,cpp,java,python setl shiftwidth=4
 au FileType txt setl lbr
 au FileType txt setl tw=78
 
@@ -245,6 +245,7 @@ autocmd FileType vim set nofen
 autocmd FileType vim map <buffer> <leader><space> :w!<cr>:source %<cr>
 
 autocmd FileType c,cpp  map <buffer> <leader><space> :make<cr>
+autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 nmap <leader>cn :cn<cr>
 nmap <leader>cp :cp<cr>
@@ -274,8 +275,7 @@ highlight lightpurple guibg=lightgrey guifg=black
 """"""""""""""""""""""""""""""
 " ctags setting
 """"""""""""""""""""""""""""""
-set tags=/home/yun63/backup/stl_tags
-set tags+=/home/yun63/myself/repos/aoi/tags
+set tags=/home/yun63/git-repos/pb/tags
 set tags+=./tags
 
 """"""""""""""""""""""""""""""
