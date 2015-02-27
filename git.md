@@ -171,3 +171,14 @@ eg:
 
 Git分支管理
 ===================
+
+## 新建分支
+
+`git branch [branch-name]`
+
+这会在当前commit对象上新建一个分支指针
+
+## 切换分支
+
+`git checkout [branch-name]`
+
