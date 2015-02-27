@@ -239,3 +239,7 @@ git branch
 > 可能有点乱，我们不妨举例说明。假设你们团队有个地址为 git.ourcompany.com 的 Git服务器。如果你从这里克隆，Git会自动为你
 > 将此远程仓库命名为 origin，并下载其中所有的数据，建立一个指向它的 master分支的指针，在本地命名为 origin/master，但你无
 > 法在本地更改其数据。接着，Git 建立一个属于你自己的本地 master 分支，始于 origin上master分支相同的位置,你可以就此开始工作.
+
+一次git clone会建立你自己的的本地master分支和远程origin/master分支,它们都指向origin/master分支的最后一次提交.
+`git fetch origin`进行同步,该命令首先找到origin是哪个服务器,从上面获取你尚未拥有的数据,更新本地数据库,然后把
+origin/master的指针移动到它最新的位置.
