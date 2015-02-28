@@ -243,3 +243,63 @@ git branch
 一次git clone会建立你自己的的本地master分支和远程origin/master分支,它们都指向origin/master分支的最后一次提交.
 `git fetch origin`进行同步,该命令首先找到origin是哪个服务器,从上面获取你尚未拥有的数据,更新本地数据库,然后把
 origin/master的指针移动到它最新的位置.
+
+## 推送
+
+要想和其他人分享某个分支,你需要把它推送到一个你拥有写权限的远程仓库,你的本地分支不会被自动同步到你引入的远程分支中,除非
+你明确执行推送操作.
+
+> 如果你有个叫serverfix的分支需要和他人一起开发,可以运行git push (远程仓库名) (分支名)
+
+```
+$ git push origin serverfix
+ * [new branch] serverfix -> serverfix
+```
+也可以运行git push origin serverfix:serverfix来实现相同的效果,"提取我的serverfix并更新到远程仓库的serverfix"
+若想把远程分支叫作awesomebranch,可以用push origin serverfix:awesomebranch来推送数据.
+ `**git push origin [远程仓库] [本地分支]:[远程分支]**`
+
+接下来,当你的协作者再次从服务器上拉取数据时,他们将得到一个新的远程分支
+```
+$ git fetch origin
+ * [new branch] serverfix   -> origin/serverfix
+```
+> **Note**:
+> 在fetch操作抓来新的远程分支之后,你仍然无法在本地编辑该远程仓库,换句话说,在本例中,你不会有一个新的serverfix分支,有的
+> 只是一个你无法移动的origin/serverfix指针.
+> 如果要把该内容合并到当前分支,可以运行 `git merge origin/serverfix`.
+> 如果想要一份自己的serverfix来开发,可以在远程分支的基础上分化出一个新的分支来:
+>> $ git checkout -b serverfix origin/serverfix
+> 这会切换到新建的serverfix**本地分支**,其内容和远程分支origin/serverfix一致,你可以在里面继续开发了.
+
+## 跟踪分支
+
+> 从远程分支检出的本地分支称为跟踪分支.跟踪分支是一种和远程分支有直接联系的本地分支
+在克隆仓库时,Git通常会自动创建一个master分支来跟踪orgin/master,这这是git push和git pull一开始就能正常工作的原因.
+
+## 删除远程分支
+
+如果不再需要某个远程分支了,比如搞定了某个特性并把它合并进了远程的master分支(或任何其他存放稳定代码的地方),可以用
+`git push [远程名] :[分支名]`来删除它.
+```
+$ git push origin :serverfix
+ - [deleted]    serverfix
+```
+> 记忆方法: 远程推送命令`git push [远程仓库] [本地分支]:[远程分支]`省略[本地分支],也就是说"在这里提取空白然后把它变成[远程分支]"
+
+## 衍合
+
+把一个分支整合到另一个分支的办法有两种: merge(合并)和rebase(衍合)
+
+1. 衍合基础
+
+    merge的原理是把两个分支的最新快照以及二者最新的共同祖先进行三方合并.
+
+    rebase的原理是回到两个分支的共同祖先,提取你所在分支每次提交时产生的diff,把这些diff分别保存到临时文件里,然后给需要衍合的分支依次打diff补丁.
+    
+2. 更多有趣的衍合
+3. 衍合的风险
+
+
+
+
