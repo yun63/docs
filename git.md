@@ -298,6 +298,33 @@ $ git push origin :serverfix
     rebase的原理是回到两个分支的共同祖先,提取你所在分支每次提交时产生的diff,把这些diff分别保存到临时文件里,然后给需要衍合的分支依次打diff补丁.
     
 2. 更多有趣的衍合
+
+    你还可以在衍合分支以外的地方合并
+
+    `git rebase --onto master server client`
+
+    检出client分支,找出client和server分支的共同祖先之后的变化,然后把它们在master分支上重演一遍"
+
+    `git checkout master`
+
+    `git merge client`
+
+    这样就把client分支的修改合并到主线中了.
+
+    现在你决定把server分支的变化也包含进来,可以直接把server分支衍合到master分支而不用手工转到server分支再衍合.
+
+    `git rebase [主分支] [特性分支]`命令会先检出特性分支server,然后在master分支上重演.
+
+    ```
+    $ git rebase master server
+
+    $ git checkout master
+
+    $ git merge master server
+    ```
+
+    现在client和server分支的变化都被整合了,可以删除掉它们了`git branch -d client server`
+
 3. 衍合的风险
 
 
