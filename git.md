@@ -419,10 +419,13 @@ $ chmod a+x hooks/post-update
 commits,但你只想引入其中之一就可以使用这种方法,假设你有一个类似图1的工程
 
 **图1**:
+
 ![image] (./res/挑拣之前的历史.png)
 
 如果你想拉取e43a6到你的主干分支,可以这样:
+
 `$ git cherry-pick e43a6fd3e94888d76779ad79fb568ed180e5fcdf`
+
 这将会引入e43a6的代码,现在你的历史看起来想图2
 
 **图2**:
