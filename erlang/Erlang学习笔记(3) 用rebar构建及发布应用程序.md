@@ -223,11 +223,17 @@ $ cd rel
 ```
 
 返回应用的根目录,在rebar.config加上以下一行,把新建的rel文件夹放到rebar可访问的子文件夹里,作为应用内容发布文件夹:
+
 {sub_dirs, ["rel"]}
+
 再重新编译下应用rebarapp
+
 `$ rebar compile`
+
 如果没有报错,应用程序就可以发布了
+
 `$ rebar generate`
+
 在终端上看到"==> rel(generate)"且没有报错,应用rebarapp发布成功,并在rel/rebarapp/bin目录下生成一个用来启动应用或者停止应用
 等操作的shell文件rebarapp.
 
