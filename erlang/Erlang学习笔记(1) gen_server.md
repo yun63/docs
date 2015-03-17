@@ -109,6 +109,7 @@ gen_server的回调模块必须导出六个回调方法:
 `init/1,handle_call/3,handle_cast/2,handle_info/2,terminate/3,code_change/3`.
 
 >*gen_server_template.mini*
+
 ```
 -module().
 %% gen_server模板
