@@ -30,7 +30,7 @@ string rtrim(const string &str)
     {
         return str;
     }
-    return str.substr(0, pos);
+    return str.substr(0, pos + 1);
 }
 
 // 剪除左右两端空格字符
@@ -82,7 +82,8 @@ bool getword(const char *str, char *word, int &pos)
     strncpy(word, p1, len);
     word[len] = '\0';
 
-    for (int i = p2 - str; i < (int)strlen(str) && !isalnum(p2[0]); i++)
+    for (int i = p2 - str; 
+            i < (int)strlen(str) && !isalnum(p2[0]); i++)
     {
         ++p2;
     }

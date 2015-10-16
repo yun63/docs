@@ -33,5 +33,10 @@ int main()
         cout << "Got this word: " << word << endl;
     }
 
+    std::string str = "     hello world     ";
+    cout << base::ltrim(str) << endl;
+    cout << base::rtrim(str) << endl;
+//    cout << base::rtrim((base::ltrim(str)) << std::endl;
+
     return 0;
 }
