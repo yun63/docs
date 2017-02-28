@@ -17,6 +17,7 @@
  **/
 
 #include <string>
+#include <memory>
 
 class BookImpl;
 
@@ -24,11 +25,10 @@ class Book {
 public:
     Book();
     Book(std::string name, std::string author, unsigned int price);
-    ~Book();
     Book(const Book &other);
     Book &operator =(const Book &other);
     void PrintInfo();
 
 private:
-    BookImpl *book_impl_;
+    std::shared_ptr<BookImpl> book_impl_;
 };
