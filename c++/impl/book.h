@@ -19,7 +19,6 @@
 #include <string>
 #include <memory>
 
-class BookImpl;
 
 class Book {
 public:
@@ -30,5 +29,6 @@ public:
     void PrintInfo();
 
 private:
+    class BookImpl;
     std::shared_ptr<BookImpl> book_impl_;
 };

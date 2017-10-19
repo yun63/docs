@@ -18,13 +18,33 @@
 
 
 #include "book.h"
-#include "book_impl.h"
 
-Book::Book() : book_impl_(new BookImpl("none", "none", 0)) {
-}
+#include <iostream>
+#include <string>
+
+class Book::BookImpl {
+public:
+    BookImpl(std::string name, std::string author, unsigned int price)
+        : name_(name)
+        , author_(author)
+        , price_(price) {}
+
+    ~BookImpl() {}
+
+    void Print() {
+        std::cout << "ISBN: " << this->name_ << "\tAuthor: " << this->author_ << "\tPrice: " << this->price_ << std::endl;
+    }
+
+    std::string name_;
+    std::string author_;
+    unsigned int price_;
+};
+
+
+Book::Book() : book_impl_(new BookImpl("none", "none", 0)) {}
 
 Book::Book(std::string name, std::string author, unsigned int price)
-: book_impl_(new BookImpl(name, author, price)) {
+    : book_impl_(new BookImpl(name, author, price)) {
 }
 
 Book::Book(const Book &other) : book_impl_(new BookImpl(other.book_impl_->name_,other.book_impl_->author_, other.book_impl_->price_)) {
