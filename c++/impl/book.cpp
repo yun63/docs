@@ -22,7 +22,7 @@
 #include <iostream>
 #include <string>
 
-class Book::BookImpl {
+class BookImpl {
 public:
     BookImpl(std::string name, std::string author, unsigned int price)
         : name_(name)
