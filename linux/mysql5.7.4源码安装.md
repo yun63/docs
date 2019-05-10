@@ -113,7 +113,7 @@ mysql> SET PASSWORD = PASSWORD('123456');
 
 若要设置root用户可以远程访问，执行
 
-`mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'180.76.128.15%' IDENTIFIED BY 'root3gx' WITH GRANT OPTION;`
+`mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'180.76.128.15%' IDENTIFIED BY 'rootpasswd' WITH GRANT OPTION;`
 
 五 配置防火墙
 
